@@ -18,6 +18,14 @@
       select * from user_tb where id = #{id}  
    </select>
 
+   <select id="findByPassword" resultType="shop.mtcoding.securit.model.User">
+      select * from user_tb where password = #{password}  
+   </select>
+
+   <select id="findByUsernameAndPassword" resultType="shop.mtcoding.securit.model.User">
+      select * from user_tb where username = #{username} and password = #{password}
+   </select> 
+
     <delete id="deleteById">
           delete from user_tb where id = #{id}
     </delete>

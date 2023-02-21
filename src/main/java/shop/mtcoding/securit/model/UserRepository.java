@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import shop.mtcoding.securit.dto.UserReq.LoginReqDto;
+
 @Mapper
 public interface UserRepository {
 
@@ -19,4 +21,6 @@ public interface UserRepository {
     public List<User> findAll();
 
     public User findById(int id);
+
+    public User findByUsernameAndPassword(LoginReqDto loginReqDto);
 }
