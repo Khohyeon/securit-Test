@@ -15,8 +15,6 @@ import shop.mtcoding.securit.handler.ex.CustomException;
 import shop.mtcoding.securit.model.User;
 import shop.mtcoding.securit.model.UserRepository;
 import shop.mtcoding.securit.service.UserService;
-import shop.mtcoding.securit.util.PasswordEncoder;
-import shop.mtcoding.securit.util.SHA256PasswordEncoder;
 
 @Controller
 public class UserController {
@@ -42,28 +40,18 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(LoginReqDto loginReqDto, User user, Model model, String password) {
+    public String login(LoginReqDto loginReqDto, Model model, String rawPassword) {
+
         if (loginReqDto.getUsername() == null || loginReqDto.getUsername().isEmpty()) {
             throw new CustomException("username을 작성해주세요", HttpStatus.BAD_REQUEST);
         }
         if (loginReqDto.getPassword() == null || loginReqDto.getPassword().isEmpty()) {
             throw new CustomException("password를 작성해주세요", HttpStatus.BAD_REQUEST);
         }
-        // User principal = userService.로그인(loginReqDto);
 
-        PasswordEncoder passwordEncoder = new SHA256PasswordEncoder();
+        User principal = userService.로그인(loginReqDto);
 
-        String rawPassword = userRepository.findByPassword(password);
-
-        // encode메서드는 입력받은 비밀번호를 먼저 Bcrypt로 암호화하고, 그 결과를 SHA-256 해시 함수로 다시 암호화하여 반환합니다.
-        String encodedPassword = passwordEncoder.encode(rawPassword);
-
-        // matches메서드는 입력된 비밀번호와 저장된 비밀번호가 일치하는지 확인하는 역할을 합니다.
-        boolean isMatched = passwordEncoder.matches(rawPassword, encodedPassword);
-        if (isMatched == false) {
-            throw new CustomException("비밀번호가 올바르지 않습니다.");
-        }
-        // session.setAttribute("principal", principal);
+        session.setAttribute("principal", principal);
         return "redirect:/main";
     }
 
