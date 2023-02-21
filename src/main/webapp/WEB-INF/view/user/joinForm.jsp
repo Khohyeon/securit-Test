@@ -13,7 +13,7 @@
         <body>
             <h1>회원가입 페이지</h1>
             <hr>
-            <form action="/login" method="post">
+            <form action="/join" method="post">
                 <table border="1">
                     <input type="text" name="username" placeholder="username"><br>
                     <input type="password" name="password" placeholder="password"><br>
