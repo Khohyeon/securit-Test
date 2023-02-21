@@ -12,7 +12,8 @@ public interface UserRepository {
 
     public String findByPassword(@Param("password") String password);
 
-    public int insert(User user);
+    public int insert(@Param("username") String username, @Param("password") String password,
+            @Param("email") String email);
 
     public int updateById(User user);
 
@@ -22,5 +23,5 @@ public interface UserRepository {
 
     public User findById(int id);
 
-    public User findByUsernameAndPassword(LoginReqDto loginReqDto);
+    public User findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

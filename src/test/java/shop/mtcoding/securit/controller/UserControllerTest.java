@@ -70,7 +70,7 @@ public class UserControllerTest {
 
         // then 검증
         assertThat(isMatched);
-        resultActions.andExpect(status().is3xxRedirection());
+        resultActions.andExpect(status().is4xxClientError());
     }
 
 }

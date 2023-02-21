@@ -49,9 +49,9 @@ public class UserController {
             throw new CustomException("password를 작성해주세요", HttpStatus.BAD_REQUEST);
         }
 
-        userService.로그인(loginReqDto);
+        User principal = userService.로그인(loginReqDto);
 
-        // session.setAttribute("principal", principal);
+        session.setAttribute("principal", principal);
         return "redirect:/main";
     }
 
